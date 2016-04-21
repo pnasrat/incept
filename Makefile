@@ -35,5 +35,5 @@ run: disk.img
 
 clean:
 #	sudo kpartx -d disk.img
-	rm -f disk.img
+	rm -f disk.img incept
 	rm -f entry.o incept.o

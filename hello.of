@@ -1,0 +1,5 @@
+\ Not yet a bootloader.
+\ blah
+
+show-devs
+." Hello, Open Firmware!" cr

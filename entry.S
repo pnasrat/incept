@@ -7,6 +7,9 @@
  */
 .globl _start
 start:
+  /*  deadbeef r3 */
+  lis	r3,-8531
+  ori	r3,r3,48879
   /* "load immediate shifted" 16-31 bits into r10 */
 	lis	r10,edata@h
   /* load edata 0-15 bits into r10 */

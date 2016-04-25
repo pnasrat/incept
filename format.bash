@@ -1,8 +1,11 @@
 #!/bin/bash
 
-sudo kpartx -av disk.img
-sudo mkfs.ext2 /dev/mapper/loop1p1
-sudo mount -o loop /dev/mapper/loop1p1 /mnt/
-sudo mkdir /mnt/ppc
-sudo cp incept bootinfo.txt /mnt/ppc/
-sudo umount /mnt
+PART=$(sudo kpartx -av disk.img)
+if [ $? -eq 0 ]; then
+  DEV=$(echo $PART | cut -d\  -f3 )
+  sudo mkfs.ext2 /dev/mapper/$DEV
+  sudo mount -o loop /dev/mapper/$DEV /mnt/
+  sudo mkdir /mnt/ppc
+  sudo cp incept bootinfo.txt /mnt/ppc/
+  sudo umount /mnt
+fi

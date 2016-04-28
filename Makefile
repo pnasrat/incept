@@ -30,6 +30,8 @@ disk.img: incept
 	parted --script --align none $@ -- mkpart primary ext2 0 100%
 	bash format.bash
 
+of:
+	$(QEMU) -nographic
 
 run: disk.img
 	$(QEMU) -nographic -hda $< 

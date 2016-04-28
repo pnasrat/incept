@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PART=$(sudo kpartx -av disk.img)
+PART=$(sudo kpartx -s -av disk.img)
 if [ $? -eq 0 ]; then
   DEV=$(echo $PART | cut -d\  -f3 )
   sudo mkfs.ext2 /dev/mapper/$DEV

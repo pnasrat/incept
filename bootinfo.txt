@@ -1,5 +1,8 @@
 <chrp-boot>
 <description>Incept</description> 
 <os-name>Incept</os-name> 
-<boot-script>boot &device;:\ppc\incept</boot-script>
+<boot-script>
+load-base release-load-area
+boot &device;:\ppc\incept
+</boot-script>
 </chrp-boot>

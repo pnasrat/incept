@@ -2,16 +2,18 @@ CC=powerpc-elf-gcc
 LD=powerpc-elf-ld
 QEMU=qemu-system-ppc
 GDB=powerpc-elf-gdb
-CFLAGS=-Os -m32 
+OBJDUMP=powerpc-elf-objdump
+CFLAGS=-g3 -m32
 OBJS=entry.o incept.o
+STRIP=powerpc-elf-strip
 TEXTADDR  = 0x200000
 
-CFLAGS += -DTEXTADDR=$(TEXTADDR) -g
+CFLAGS += -DTEXTADDR=$(TEXTADDR) -g -fno-signed-char
 
 LDFLAGS = -Ttext $(TEXTADDR) -Bstatic -melf32ppclinux
 
 
-.PHONY: clean run
+.PHONY: clean run debug dump gdb
 
 all: incept disk.img
 
@@ -37,7 +39,7 @@ run: disk.img
 	$(QEMU) -nographic -hda $< 
 
 debug: disk.img
-	$(QEMU) -nographic -hda $<  -S
+	$(QEMU) -nographic -hda $<  -S -s
 
 clean:
 	sudo kpartx -d disk.img || :
@@ -46,3 +48,6 @@ clean:
 
 gdb: incept
 	$(GDB) -q incept
+
+dump: incept
+	$(OBJDUMP) -d $<

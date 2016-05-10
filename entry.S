@@ -6,7 +6,7 @@
  * Main entry point. We zero the BSS then jump to incept_start.
  */
 .globl _start
-start:
+_start:
   /*  deadbeef r3 */
   lis	r13,-8531
   ori	r13,r13,48879
@@ -32,4 +32,4 @@ start:
 /* loop branch if not equal to end address */
 	bne	1b
 /* invoke our start method */
-	b	incept_start
+  b	incept_start
